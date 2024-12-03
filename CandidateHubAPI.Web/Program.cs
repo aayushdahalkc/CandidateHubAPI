@@ -1,4 +1,6 @@
 using CandidateHubAPI.Infrastructure;
+using CandidateHubAPI.Interface.Repositories;
+using CandidateHubAPI.Services.RepositoriesServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,9 @@ builder.Services.AddSwaggerGen();
 // Database configuration
 builder.Services.AddDbContext<CandidateDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Dependency injection
+builder.Services.AddScoped<ICandidateRepository, ICandidateRepositoryService>();
 
 var app = builder.Build();
 

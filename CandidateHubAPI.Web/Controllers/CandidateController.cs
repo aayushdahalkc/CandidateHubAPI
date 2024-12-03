@@ -1,6 +1,5 @@
 ﻿using CandidateHubAPI.ApplicationCore.Entities;
 using CandidateHubAPI.Interface.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CandidateHubAPI.Web.Controllers
@@ -10,26 +9,33 @@ namespace CandidateHubAPI.Web.Controllers
     public class CandidateController : ControllerBase
     {
         private readonly ICandidateRepository _repository;
-        private readonly ILogger<CandidateController> _logger;
 
-        public CandidateController(ILogger<CandidateController> logger, ICandidateRepository repository)
+        public CandidateController(ICandidateRepository repository)
         {
-            _logger = logger;
             _repository = repository;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateCandidate(Candidate candidate)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (candidate == null || string.IsNullOrEmpty(candidate.Email))
+                return BadRequest("Invalid candidate data.");
 
-            var result = await _repository.AddOrUpdateAsync(candidate);
-            return Ok(new
+            try
             {
-                message = result.Id > 0 ? "Candidate updated successfully." : "Candidate created successfully.",
-                candidateId = result.Id
-            });
+                var result = await _repository.AddOrUpdateAsync(candidate);
+                return Ok(new
+                {
+                    message = result.Id > 0 ? "Candidate updated successfully." : "Candidate created successfully.",
+                    candidateId = result.Id
+                });
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "Internal Server Error"); ;
+            }
+           
         }
     }
 }

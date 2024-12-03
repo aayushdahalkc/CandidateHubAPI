@@ -12,8 +12,4 @@
     <ProjectReference Include="..\CandidateHubAPI.Interface\CandidateHubAPI.Interface.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RepositoriesServices\" />
-  </ItemGroup>
-
 </Project>

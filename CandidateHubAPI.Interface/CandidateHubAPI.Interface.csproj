@@ -11,8 +11,4 @@
     <ProjectReference Include="..\CandidateHubAPI.Infrastructure\CandidateHubAPI.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
