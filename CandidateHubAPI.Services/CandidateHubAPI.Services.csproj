@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CandidateHubAPI.ApplicationCore\CandidateHubAPI.ApplicationCore.csproj" />
+    <ProjectReference Include="..\CandidateHubAPI.Infrastructure\CandidateHubAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\CandidateHubAPI.Interface\CandidateHubAPI.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RepositoriesServices\" />
+  </ItemGroup>
+
 </Project>
